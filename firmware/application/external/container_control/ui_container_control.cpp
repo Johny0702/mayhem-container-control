@@ -32,11 +32,7 @@ ContainerControlView::ContainerControlView(NavigationView& nav)
 
     // Add all UI elements
     add_children({
-        &rect_header,
         &text_title,
-        &text_version,
-        &rect_status,
-        &text_status_label,
         &rect_tx_indicator,
         &text_tx_status,
         &rect_rx_indicator,

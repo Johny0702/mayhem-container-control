@@ -20,51 +20,32 @@ class ContainerControlView : public View {
    private:
     NavigationView& nav_;
 
-    // Header with colored background
-    Rectangle rect_header{
-        {0, 0, 240, 50},
-        Color::dark_blue()};
-
     // Title
     Text text_title{
-        {10, 8, 220, 20},
-        "CONTAINER CONTROL"};
+        {10, 10, 220, 20},
+        "CONTAINER CONTROL v2.0"};
 
-    Text text_version{
-        {10, 28, 220, 12},
-        "v2.0 - Authority Mode"};
-
-    // Status Panel
-    Rectangle rect_status{
-        {10, 60, 220, 70},
-        Color::dark_grey()};
-
-    Text text_status_label{
-        {20, 68, 100, 16},
-        "SYSTEM STATUS"};
-
-    // TX Status with colored indicator
+    // Status indicators with dots
     Rectangle rect_tx_indicator{
-        {20, 90, 12, 12},
+        {10, 40, 8, 8},
         Color::red()};
 
     Text text_tx_status{
-        {36, 88, 180, 16},
+        {22, 38, 180, 16},
         "TX: BLOCKED"};
 
-    // RX Status with colored indicator
     Rectangle rect_rx_indicator{
-        {20, 108, 12, 12},
+        {10, 60, 8, 8},
         Color::green()};
 
     Text text_rx_status{
-        {36, 106, 180, 16},
+        {22, 58, 180, 16},
         "RX: ACTIVE"};
 
-    // Device count with icon
+    // Device count
     Text text_devices{
-        {20, 145, 200, 20},
-        "Detected Devices: 0"};
+        {10, 85, 200, 16},
+        "Devices: 0"};
 
     // Large prominent start button
     Button button_start{
