@@ -55,7 +55,7 @@ class ContainerControlView : public View {
     // Security Dashboard button
     Button button_security{
         {20, 225, 200, 32},
-        "Security Dashboard"};
+        "Security"};
 
     // Back button (smaller, bottom)
     Button button_back{

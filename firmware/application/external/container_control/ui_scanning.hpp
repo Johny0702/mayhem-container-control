@@ -51,7 +51,7 @@ class ScanningView : public View {
 
     Text text_frequency{
         {20, 120, 200, 16},
-        "Freq: 433.000 MHz"};
+        "433 MHz"};
 
     Text text_devices{
         {20, 145, 200, 16},

@@ -45,7 +45,7 @@ class ContainerSetupView : public View {
     // UI Elements
     Text text_title{
         {20, 20, 200, 16},
-        "New Inspection"};
+        "Setup"};
 
     Text label_mode{
         {20, 45, 200, 16},
