@@ -32,25 +32,39 @@ ContainerControlView::ContainerControlView(NavigationView& nav)
 
     // Add all UI elements
     add_children({
+        &rect_header,
         &text_title,
-        &text_subtitle,
-        &text_info1,
-        &text_info2,
-        &text_info3,
+        &text_version,
+        &rect_status,
+        &text_status_label,
+        &rect_tx_indicator,
+        &text_tx_status,
+        &rect_rx_indicator,
+        &text_rx_status,
         &text_devices,
         &button_start,
         &button_security,
         &button_back});
 
-    // Update version number
-    text_title.set("Container Control v2.0");
+    // Style the header text
+    text_title.set_style(&Styles::white);
+    text_version.set_style(&Styles::white);
 
-    // Update TX status from Driver Gate
+    // Style status label
+    text_status_label.set_style(&Styles::white_small);
+
+    // Update TX status from Driver Gate with colors
     if (container_control::DriverGate::is_tx_allowed()) {
-        text_info2.set("TX: Allowed (TEST)");
+        text_tx_status.set("TX: ALLOWED (TEST)");
+        rect_tx_indicator.set_color(Color::yellow());
     } else {
-        text_info2.set("TX: Blocked");
+        text_tx_status.set("TX: BLOCKED");
+        rect_tx_indicator.set_color(Color::red());
     }
+
+    // Set RX status as active
+    text_rx_status.set("RX: ACTIVE");
+    rect_rx_indicator.set_color(Color::green());
 
     // Configure start button - navigate to setup screen
     button_start.on_select = [this](Button&) {

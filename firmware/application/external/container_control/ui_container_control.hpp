@@ -20,46 +20,65 @@ class ContainerControlView : public View {
    private:
     NavigationView& nav_;
 
+    // Header with colored background
+    Rectangle rect_header{
+        {0, 0, 240, 50},
+        Color::dark_blue()};
+
     // Title
     Text text_title{
-        {20, 20, 200, 16},
-        "Container Control v1.0"};
+        {10, 8, 220, 20},
+        "CONTAINER CONTROL"};
 
-    Text text_subtitle{
-        {20, 40, 200, 16},
-        "RX-Only System"};
+    Text text_version{
+        {10, 28, 220, 12},
+        "v2.0 - Authority Mode"};
 
-    // System Info
-    Text text_info1{
-        {20, 70, 200, 16},
-        "Status: Ready"};
+    // Status Panel
+    Rectangle rect_status{
+        {10, 60, 220, 70},
+        Color::dark_grey()};
 
-    Text text_info2{
-        {20, 90, 200, 16},
-        "TX: Blocked"};
+    Text text_status_label{
+        {20, 68, 100, 16},
+        "SYSTEM STATUS"};
 
-    Text text_info3{
-        {20, 110, 200, 16},
-        "Mode: Authority"};
+    // TX Status with colored indicator
+    Rectangle rect_tx_indicator{
+        {20, 90, 12, 12},
+        Color::red()};
 
-    // Device count display
+    Text text_tx_status{
+        {36, 88, 180, 16},
+        "TX: BLOCKED"};
+
+    // RX Status with colored indicator
+    Rectangle rect_rx_indicator{
+        {20, 108, 12, 12},
+        Color::green()};
+
+    Text text_rx_status{
+        {36, 106, 180, 16},
+        "RX: ACTIVE"};
+
+    // Device count with icon
     Text text_devices{
-        {20, 140, 200, 16},
-        "Devices: 0"};
+        {20, 145, 200, 20},
+        "Detected Devices: 0"};
 
-    // Start button
+    // Large prominent start button
     Button button_start{
-        {60, 180, 120, 32},
+        {20, 175, 200, 40},
         "START SCAN"};
 
     // Security Dashboard button
     Button button_security{
-        {60, 220, 120, 32},
-        "SECURITY"};
+        {20, 225, 200, 32},
+        "Security Dashboard"};
 
-    // Back button
+    // Back button (smaller, bottom)
     Button button_back{
-        {60, 260, 120, 32},
+        {70, 270, 100, 28},
         "Back"};
 
     void on_start_scan();
