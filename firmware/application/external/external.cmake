@@ -1,4 +1,21 @@
 set(EXTCPPSRC
+	#container_control  TBD bytes
+	external/container_control/main.cpp
+	external/container_control/ui_container_control.cpp
+	external/container_control/ui_container_setup.cpp
+	external/container_control/ui_scanning.cpp
+	external/container_control/ui_device_list.cpp
+	external/container_control/ui_security_dashboard.cpp
+	external/container_control/ui_admin_login.cpp
+	external/container_control/driver_gate/driver_gate.cpp
+	external/container_control/device_profiler/device_profiler.cpp
+	external/container_control/scanner/scanner.cpp
+	external/container_control/security/anti_jamming.cpp
+	external/container_control/security/gps_spoofing.cpp
+	external/container_control/security/threat_detection.cpp
+	external/container_control/security/forensic_evidence.cpp
+	external/container_control/security/admin_security.cpp
+
 	#afsk_rx   16 byte
 	external/afsk_rx/main.cpp
 	external/afsk_rx/ui_afsk_rx.cpp
@@ -279,6 +296,7 @@ set(EXTCPPSRC
 )
 
 set(EXTAPPLIST
+	container_control
 	afsk_rx
 	calculator
 	font_viewer

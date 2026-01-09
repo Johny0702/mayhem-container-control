@@ -1,0 +1,57 @@
+name: Build Container Control System
+
+on:
+  push:
+    branches: [ main, master, container-control ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Docker image
+      run: docker build -t portapack-dev -f dockerfile .
+
+    - name: Build firmware
+      run: |
+        docker run --rm \
+          -v ${{ github.workspace }}:/havocsrc \
+          portapack-dev \
+          bash -c "cd /havocsrc && mkdir -p build && cd build && cmake .. && make -j2 firmware"
+
+    - name: List build artifacts
+      run: |
+        echo "=== Firmware binaries ==="
+        find build -name "*.bin" -o -name "*.ppma" | head -20
+        ls -lh build/firmware/*.bin || true
+
+    - name: Upload firmware artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: portapack-mayhem-firmware
+        path: |
+          build/firmware/*.bin
+          build/firmware/*.elf
+          build/firmware/application/APPS/*.ppma
+        if-no-files-found: warn
+
+    - name: Create release (on tag)
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          build/firmware/*.bin
+          build/firmware/application/APPS/*.ppma
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
