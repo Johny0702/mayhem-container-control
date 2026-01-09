@@ -32,7 +32,8 @@ include(CheckCXXCompilerFlag)
 project(application)
 
 # Compiler options here.
-set(USE_OPT "-Os -g --specs=nano.specs -specs=nosys.specs")
+# OPTIMIZED FOR SIZE: Removed -g (debug symbols), added aggressive size opts
+set(USE_OPT "-Os -ffunction-sections -fdata-sections --specs=nano.specs -specs=nosys.specs")
 
 # C specific options here (added to USE_OPT).
 set(USE_COPT "-std=gnu99")
@@ -44,16 +45,18 @@ if(cpp20_supported)
 else()
 	set(USE_CPPOPT "-std=c++17")
 endif()
-set(USE_CPPOPT "${USE_CPPOPT} -fno-rtti -fno-exceptions -Weffc++ -Wuninitialized -Wno-volatile")
+set(USE_CPPOPT "${USE_CPPOPT} -fno-rtti -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -Weffc++ -Wuninitialized -Wno-volatile")
 
 # Enable this if you want the linker to remove unused code and data
 set(USE_LINK_GC yes)
 
 # Linker extra options here.
-set(USE_LDOPT)
+# OPTIMIZED FOR SIZE: Added garbage collection of unused sections
+set(USE_LDOPT "-Wl,--gc-sections")
 
 # Enable this if you want link time optimizations (LTO) - this flag affects chibios only
-set(USE_LTO no)
+# ENABLED FOR SIZE: Aggressive cross-module optimization
+set(USE_LTO yes)
 
 # If enabled, this option allows to compile the application in THUMB mode.
 set(USE_THUMB yes)
