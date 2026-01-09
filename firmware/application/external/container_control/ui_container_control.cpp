@@ -46,13 +46,6 @@ ContainerControlView::ContainerControlView(NavigationView& nav)
         &button_security,
         &button_back});
 
-    // Style the header text
-    text_title.set_style(&Styles::white);
-    text_version.set_style(&Styles::white);
-
-    // Style status label
-    text_status_label.set_style(&Styles::white_small);
-
     // Update TX status from Driver Gate with colors
     if (container_control::DriverGate::is_tx_allowed()) {
         text_tx_status.set("TX: ALLOWED (TEST)");
