@@ -49,7 +49,7 @@ class ContainerSetupView : public View {
 
     Text label_mode{
         {20, 45, 200, 16},
-        "Operation Mode:"};
+        "Mode:"};
 
     Button button_mode_container{
         {20, 65, 70, 24},

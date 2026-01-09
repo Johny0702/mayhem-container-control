@@ -69,7 +69,7 @@ class ScanningView : public View {
 
     Button button_results{
         {40, 265, 180, 32},
-        "View Results"};
+        "Results"};
 
     // Update timer
     MessageHandlerRegistration message_handler_frame_sync{
