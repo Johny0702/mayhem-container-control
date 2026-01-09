@@ -49,10 +49,6 @@ void SecurityDashboardView::focus() {
     button_back.focus();
 }
 
-void SecurityDashboardView::on_frame_sync() {
-    update_display();
-}
-
 void SecurityDashboardView::update_display() {
     // Update Anti-Jamming status
     auto jamming_status = container_control::security::AntiJammingDetector::get_status();

@@ -22,8 +22,6 @@ class SecurityDashboardView : public View {
     void focus() override;
     std::string title() const override { return "Security Dashboard"; }
 
-    void on_frame_sync() override;
-
    private:
     NavigationView& nav_;
 
