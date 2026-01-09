@@ -143,6 +143,53 @@ void Scanner::clear_results() {
     result_count_ = 0;
 }
 
+void Scanner::process() {
+    // Only process if scanning
+    if (status_ != ScanStatus::STATUS_SCANNING) {
+        return;
+    }
+
+    // Check if we have ranges configured
+    if (range_count_ == 0 || current_range_index_ >= range_count_) {
+        status_ = ScanStatus::STATUS_COMPLETE;
+        return;
+    }
+
+    // Get current range
+    const FrequencyRange& current_range = ranges_[current_range_index_];
+
+    // Increment current step
+    current_step_++;
+
+    // Advance frequency
+    current_frequency_ += current_range.step_size;
+
+    // Check if we've finished current range
+    if (current_frequency_ > current_range.end_freq) {
+        current_range_index_++;
+
+        // Check if more ranges to scan
+        if (current_range_index_ < range_count_) {
+            current_frequency_ = ranges_[current_range_index_].start_freq;
+        } else {
+            // All ranges complete
+            status_ = ScanStatus::STATUS_COMPLETE;
+            return;
+        }
+    }
+
+    // Simulate RSSI measurement (in real implementation, use HackRF receiver)
+    int8_t rssi = measure_rssi(current_frequency_);
+
+    // If signal detected (above threshold), add to results
+    if (rssi > -80 && result_count_ < MAX_SCAN_RESULTS) {
+        results_[result_count_].frequency = current_frequency_;
+        results_[result_count_].rssi = rssi;
+        results_[result_count_].active_signal = (rssi > -70);
+        result_count_++;
+    }
+}
+
 void Scanner::setup_ism_profile() {
     // ISM Band 433 MHz
     add_range(433050000, 434790000, 25000);  // 433 MHz

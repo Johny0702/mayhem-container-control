@@ -60,6 +60,10 @@ ScanningView::ScanningView(NavigationView& nav, const char* container_id, const 
         this->view_results();
     };
 
+    // Initialize scanner and load default ISM profile
+    container_control::Scanner::init();
+    container_control::Scanner::load_profile(container_control::ScanProfile::PROFILE_ISM);
+
     // Start scanning
     container_control::Scanner::start();
     scanning_active_ = true;
@@ -82,40 +86,37 @@ void ScanningView::focus() {
 void ScanningView::on_frame_sync() {
     if (!scanning_active_) return;
 
+    // Process scanner (advance to next frequency)
+    container_control::Scanner::process();
+
+    // Get current scanner status
+    auto status = container_control::Scanner::get_status();
+    progress_ = container_control::Scanner::get_progress();
+    current_frequency_ = container_control::Scanner::get_current_frequency();
+
     // Update display every frame
     update_display();
 
-    // Simulate scanning progress (in real implementation, get from Scanner)
-    auto status = container_control::Scanner::get_status();
-    if (status == container_control::ScanStatus::STATUS_SCANNING) {
-        progress_ = container_control::Scanner::get_progress();
-        current_frequency_ = container_control::Scanner::get_current_frequency();
+    // Get scan results and add to device profiler
+    uint16_t result_count = container_control::Scanner::get_result_count();
+    if (result_count > devices_found_) {
+        // New devices found
+        const container_control::ScanResult* results = container_control::Scanner::get_results();
+        for (uint16_t i = devices_found_; i < result_count; i++) {
+            container_control::DeviceProfiler::add_signal(results[i].frequency, results[i].rssi);
+        }
+        devices_found_ = result_count;
+    }
 
-        // Simulate finding devices (in real implementation, add from scan results)
-        if (progress_ > 20 && devices_found_ == 0) {
-            // Simulate first device found
-            container_control::DeviceProfiler::add_signal(433920000, -55);
-            devices_found_++;
-        }
-        if (progress_ > 50 && devices_found_ == 1) {
-            container_control::DeviceProfiler::add_signal(868300000, -60);
-            devices_found_++;
-        }
-        if (progress_ > 80 && devices_found_ == 2) {
-            container_control::DeviceProfiler::add_signal(915000000, -58);
-            devices_found_++;
-        }
+    // Check if scan is complete
+    if (status == container_control::ScanStatus::STATUS_COMPLETE) {
+        scanning_active_ = false;
+        text_status.set("Scan Complete!");
+        button_pause.set_text("Pause");
 
-        // Check if complete
-        if (progress_ >= 100) {
-            scanning_active_ = false;
-            text_status.set("Scan Complete!");
-            button_pause.set_text("Pause");
-
-            // Analyze devices
-            container_control::DeviceProfiler::analyze();
-            devices_found_ = container_control::DeviceProfiler::get_device_count();
-        }
+        // Analyze devices
+        container_control::DeviceProfiler::analyze();
+        devices_found_ = container_control::DeviceProfiler::get_device_count();
     }
 }
 

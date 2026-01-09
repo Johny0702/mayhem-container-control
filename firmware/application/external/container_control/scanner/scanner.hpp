@@ -90,6 +90,9 @@ class Scanner {
     // Clear results
     static void clear_results();
 
+    // Process one scan step (call periodically)
+    static void process();
+
    private:
     static ScanStatus status_;
     static ScanProfile current_profile_;
