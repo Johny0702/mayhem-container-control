@@ -180,18 +180,18 @@ set(EXTCPPSRC
 	external/scanner/main.cpp
 	external/scanner/ui_scanner.cpp
 
-	
-	#gfxEQ 80 byte
-	external/gfxeq/main.cpp
-	external/gfxeq/ui_gfxeq.cpp
+
+	#gfxEQ 80 byte - REMOVED FOR SPACE
+	#external/gfxeq/main.cpp
+	#external/gfxeq/ui_gfxeq.cpp
 
 	#detector_rx  168 byte
 	external/detector_rx/main.cpp
 	external/detector_rx/ui_detector_rx.cpp
 
-	#space_invaders  0 byte
-	external/spaceinv/main.cpp
-	external/spaceinv/ui_spaceinv.cpp
+	#space_invaders  0 byte - REMOVED FOR SPACE
+	#external/spaceinv/main.cpp
+	#external/spaceinv/ui_spaceinv.cpp
 
 	
 	
