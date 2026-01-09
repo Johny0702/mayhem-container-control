@@ -1,17 +1,12 @@
 /*
- * Container Control System - UI Implementation
+ * Container Control Core - Main UI
+ * Scanner & Detection (No Security Modules)
  */
 
 #include "ui_container_control.hpp"
 #include "ui_container_setup.hpp"
-#include "ui_security_dashboard.hpp"
 #include "portapack.hpp"
 #include "driver_gate/driver_gate.hpp"
-#include "security/anti_jamming.hpp"
-#include "security/gps_spoofing.hpp"
-#include "security/threat_detection.hpp"
-#include "security/forensic_evidence.hpp"
-#include "security/admin_security.hpp"
 
 using namespace portapack;
 
@@ -23,13 +18,6 @@ ContainerControlView::ContainerControlView(NavigationView& nav)
     // Initialize Driver Gate in AUTHORITY mode (RX-only)
     container_control::DriverGate::init(container_control::GateMode::MODE_AUTHORITY);
 
-    // Initialize all security modules
-    container_control::security::AntiJammingDetector::init();
-    container_control::security::GPSSpoofingDetector::init();
-    container_control::security::ThreatDetector::init();
-    container_control::security::ForensicEvidenceManager::init();
-    container_control::security::AdminSecurityManager::init();
-
     // Add all UI elements
     add_children({
         &text_title,
@@ -39,7 +27,6 @@ ContainerControlView::ContainerControlView(NavigationView& nav)
         &text_info3,
         &text_devices,
         &button_start,
-        &button_security,
         &button_back});
 
     // Update version number
@@ -57,11 +44,6 @@ ContainerControlView::ContainerControlView(NavigationView& nav)
         this->on_start_scan();
     };
 
-    // Configure security button
-    button_security.on_select = [this](Button&) {
-        this->on_security();
-    };
-
     // Configure back button
     button_back.on_select = [&nav](Button&) {
         nav.pop();
@@ -75,11 +57,6 @@ void ContainerControlView::focus() {
 void ContainerControlView::on_start_scan() {
     // Navigate to Container Setup screen
     nav_.push<ContainerSetupView>();
-}
-
-void ContainerControlView::on_security() {
-    // Navigate to Security Dashboard
-    nav_.push<SecurityDashboardView>();
 }
 
 }  // namespace ui

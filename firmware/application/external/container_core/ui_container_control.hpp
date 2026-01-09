@@ -52,18 +52,12 @@ class ContainerControlView : public View {
         {60, 180, 120, 32},
         "START SCAN"};
 
-    // Security Dashboard button
-    Button button_security{
-        {60, 220, 120, 32},
-        "SECURITY"};
-
     // Back button
     Button button_back{
-        {60, 260, 120, 32},
+        {60, 220, 120, 32},
         "Back"};
 
     void on_start_scan();
-    void on_security();
 };
 
 }  // namespace ui
