@@ -1,10 +1,36 @@
 set(EXTCPPSRC
+	#container_core  ~28 KB - Scanner + Device Profiler + Driver Gate
+	external/container_core/main.cpp
+	external/container_core/ui_container_control.cpp
+	external/container_core/ui_container_setup.cpp
+	external/container_core/ui_scanning.cpp
+	external/container_core/ui_device_list.cpp
+	external/container_core/driver_gate/driver_gate.cpp
+	external/container_core/device_profiler/device_profiler.cpp
+	external/container_core/scanner/scanner.cpp
+
+	#container_security  ~30 KB - All 5 Security Modules + Dashboard
+	external/container_security/main.cpp
+	external/container_security/ui_security_dashboard.cpp
+	external/container_security/ui_admin_login.cpp
+	external/container_security/security/anti_jamming.cpp
+	external/container_security/security/gps_spoofing.cpp
+	external/container_security/security/threat_detection.cpp
+	external/container_security/security/forensic_evidence.cpp
+	external/container_security/security/admin_security.cpp
+
 	#afsk_rx   16 byte
 	external/afsk_rx/main.cpp
 	external/afsk_rx/ui_afsk_rx.cpp
 
-	
-	
+	#calculator  632 bytes
+	external/calculator/main.cpp
+	external/calculator/ui_calculator.cpp
+
+	#font_viewer 8 byte?!
+	external/font_viewer/main.cpp
+	external/font_viewer/ui_font_viewer.cpp
+
 	#blespam 336 bytes - array initializers?
 	external/blespam/main.cpp
 	external/blespam/ui_blespam.cpp
@@ -50,7 +76,10 @@ set(EXTCPPSRC
 	external/keyfob/ui_keyfob.cpp
 	external/keyfob/ui_keyfob.hpp
 
-	
+	#tetris 88 byte
+	external/tetris/main.cpp
+	external/tetris/ui_tetris.cpp
+
 
 	#extsensors 192 byte
 	external/extsensors/main.cpp
@@ -62,7 +91,10 @@ set(EXTCPPSRC
 	external/foxhunt/ui_foxhunt_rx.cpp
 	external/foxhunt/ui_foxhunt_rx.hpp
 
-	
+	#audio_test 192 byte
+	external/audio_test/main.cpp
+	external/audio_test/ui_audio_test.cpp
+
 	#wardrivemap 64 byte
 	external/wardrivemap/main.cpp
 	external/wardrivemap/ui_wardrivemap.cpp
@@ -134,7 +166,10 @@ set(EXTCPPSRC
 	external/remote/main.cpp
 	external/remote/ui_remote.cpp
 
-	
+	#mcu_temperature    112
+	external/mcu_temperature/main.cpp
+	external/mcu_temperature/mcu_temperature.cpp
+
 	#fmradio  640
 	external/fmradio/main.cpp
 	external/fmradio/ui_fmradio.cpp
@@ -143,7 +178,10 @@ set(EXTCPPSRC
 	external/tuner/main.cpp
 	external/tuner/ui_tuner.cpp
 
-	
+	#metronome 696 bytes
+	external/metronome/main.cpp
+	external/metronome/ui_metronome.cpp
+
 	#app_manager 40 bytes
 	external/app_manager/main.cpp
 	external/app_manager/ui_app_manager.cpp
@@ -169,18 +207,39 @@ set(EXTCPPSRC
 	external/playlist_editor/main.cpp
 	external/playlist_editor/ui_playlist_editor.cpp
 
-	
+	#snake 240 bytes
+	external/snake/main.cpp
+	external/snake/ui_snake.cpp
 
-	
-	
-	
-	
-	
+
+	#stopwatch 0
+	external/stopwatch/main.cpp
+	external/stopwatch/ui_stopwatch.cpp
+
+	#breakout 1144 bytes
+	external/breakout/main.cpp
+	external/breakout/ui_breakout.cpp
+
+	#dinogame 0 
+	external/dinogame/main.cpp
+	external/dinogame/ui_dinogame.cpp
+
+	#doom 224
+	external/doom/main.cpp
+	external/doom/ui_doom.cpp
+
+	#debug_pmem  944 byte
+	external/debug_pmem/main.cpp
+	external/debug_pmem/ui_debug_pmem.cpp
+
 	#scanner 520 byte
 	external/scanner/main.cpp
 	external/scanner/ui_scanner.cpp
 
-	
+	#level  24 byte
+	external/level/main.cpp
+	external/level/ui_level.cpp
+
 	#gfxEQ 80 byte
 	external/gfxeq/main.cpp
 	external/gfxeq/ui_gfxeq.cpp
@@ -193,8 +252,14 @@ set(EXTCPPSRC
 	external/spaceinv/main.cpp
 	external/spaceinv/ui_spaceinv.cpp
 
-	
-	
+	#blackjack 24 byte
+	external/blackjack/main.cpp
+	external/blackjack/ui_blackjack.cpp
+
+	#battleship  256 byte
+	external/battleship/main.cpp
+	external/battleship/ui_battleship.cpp
+
 	#ert 3040 bytes - has common with baseband, could be renamed the namespace, so both could have it, but not kept in fw.
 	external/ert/main.cpp
 	external/ert/ert_app.cpp
@@ -207,14 +272,23 @@ set(EXTCPPSRC
 	external/soundboard/main.cpp
 	external/soundboard/soundboard_app.cpp
 
-	
+	#game2048   - 168 byte flash
+	external/game2048/main.cpp
+	external/game2048/ui_game2048.cpp
+
 	#bht_tx - 3920 byte flash, unknown
 	external/bht_tx/main.cpp
 	external/bht_tx/ui_bht_tx.cpp
 	external/bht_tx/bht.cpp
 
-	
-	
+	#morse_practice - 80 byte flash - bc of array initializers
+	external/morse_practice/main.cpp
+	external/morse_practice/ui_morse_practice.cpp
+
+	#adult_toys_controller  144 bytes 
+	external/adult_toys_controller/main.cpp
+	external/adult_toys_controller/ui_adult_toys_controller.cpp
+
 	#flex_rx
 	external/flex_rx/main.cpp
 	external/flex_rx/ui_flex_rx.cpp	
@@ -225,7 +299,11 @@ set(EXTCPPSRC
 )
 
 set(EXTAPPLIST
+	container_core
+	container_security
 	afsk_rx
+	calculator
+	font_viewer
 	blespam
 	analogtv
 	nrf_rx
@@ -236,8 +314,10 @@ set(EXTAPPLIST
 	gpssim
 	spainter
 	keyfob
+	tetris
 	extsensors
 	foxhunt_rx
+	audio_test
 	wardrivemap
 	tpmsrx
 	protoview
@@ -255,20 +335,36 @@ set(EXTAPPLIST
 	cvs_spam
 	flippertx
 	remote
+	mcu_temperature
 	fmradio
 	tuner
+	metronome
 	app_manager
 	hopper
 	antenna_length
 	view_wav
 	sd_wipe
 	playlist_editor
+	snake
+	stopwatch
+	breakout
+	dinogame
+	doom
+	debug_pmem
 	scanner
+	level
+	gfxeq
 	detector_rx
+	spaceinv
+	blackjack
+	battleship
 	ert
 	epirb_rx
 	soundboard
+	game2048
 	bht_tx
+	morse_practice
+	adult_toys_controller
 	flex_rx
 	subcarrx
 )
