@@ -266,6 +266,21 @@ set(CPPSRC
 	ui/ui_tone_key.cpp
 	ui/ui_transmitter.cpp
 	ui/ui_bmpview.cpp
+	# Container Control System (integrated app)
+	external/container_control/ui_container_control.cpp
+	external/container_control/ui_container_setup.cpp
+	external/container_control/ui_scanning.cpp
+	external/container_control/ui_device_list.cpp
+	external/container_control/ui_security_dashboard.cpp
+	external/container_control/ui_admin_login.cpp
+	external/container_control/driver_gate/driver_gate.cpp
+	external/container_control/device_profiler/device_profiler.cpp
+	external/container_control/scanner/scanner.cpp
+	external/container_control/security/anti_jamming.cpp
+	external/container_control/security/gps_spoofing.cpp
+	external/container_control/security/threat_detection.cpp
+	external/container_control/security/forensic_evidence.cpp
+	external/container_control/security/admin_security.cpp
 	apps/ais_app.cpp
 	apps/analog_audio_app.cpp
 	apps/ble_rx_app.cpp
