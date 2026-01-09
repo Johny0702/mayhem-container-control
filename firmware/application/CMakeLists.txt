@@ -51,8 +51,8 @@ set(USE_CPPOPT "${USE_CPPOPT} -fno-rtti -fno-exceptions -fno-unwind-tables -fno-
 set(USE_LINK_GC yes)
 
 # Linker extra options here.
-# OPTIMIZED FOR SIZE: Added garbage collection of unused sections
-set(USE_LDOPT "-Wl,--gc-sections")
+# OPTIMIZED FOR SIZE: Garbage collection handled by USE_LINK_GC already
+set(USE_LDOPT)
 
 # Enable this if you want link time optimizations (LTO) - this flag affects chibios only
 # ENABLED FOR SIZE: Aggressive cross-module optimization
