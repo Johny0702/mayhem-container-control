@@ -1,4 +1,24 @@
 set(EXTCPPSRC
+	#container_core  ~28 KB - Scanner + Device Profiler + Driver Gate
+	external/container_core/main.cpp
+	external/container_core/ui_container_control.cpp
+	external/container_core/ui_container_setup.cpp
+	external/container_core/ui_scanning.cpp
+	external/container_core/ui_device_list.cpp
+	external/container_core/driver_gate/driver_gate.cpp
+	external/container_core/device_profiler/device_profiler.cpp
+	external/container_core/scanner/scanner.cpp
+
+	#container_security  ~30 KB - All 5 Security Modules + Dashboard
+	external/container_security/main.cpp
+	external/container_security/ui_security_dashboard.cpp
+	external/container_security/ui_admin_login.cpp
+	external/container_security/security/anti_jamming.cpp
+	external/container_security/security/gps_spoofing.cpp
+	external/container_security/security/threat_detection.cpp
+	external/container_security/security/forensic_evidence.cpp
+	external/container_security/security/admin_security.cpp
+
 	#afsk_rx   16 byte
 	external/afsk_rx/main.cpp
 	external/afsk_rx/ui_afsk_rx.cpp
@@ -279,6 +299,8 @@ set(EXTCPPSRC
 )
 
 set(EXTAPPLIST
+	container_core
+	container_security
 	afsk_rx
 	calculator
 	font_viewer

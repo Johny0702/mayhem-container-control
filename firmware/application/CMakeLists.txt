@@ -32,8 +32,7 @@ include(CheckCXXCompilerFlag)
 project(application)
 
 # Compiler options here.
-# OPTIMIZED FOR SIZE: Removed -g (debug symbols), added aggressive size opts
-set(USE_OPT "-Os -ffunction-sections -fdata-sections --specs=nano.specs -specs=nosys.specs")
+set(USE_OPT "-Os -g --specs=nano.specs -specs=nosys.specs")
 
 # C specific options here (added to USE_OPT).
 set(USE_COPT "-std=gnu99")
@@ -45,17 +44,15 @@ if(cpp20_supported)
 else()
 	set(USE_CPPOPT "-std=c++17")
 endif()
-set(USE_CPPOPT "${USE_CPPOPT} -fno-rtti -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables -Weffc++ -Wuninitialized -Wno-volatile")
+set(USE_CPPOPT "${USE_CPPOPT} -fno-rtti -fno-exceptions -Weffc++ -Wuninitialized -Wno-volatile")
 
 # Enable this if you want the linker to remove unused code and data
 set(USE_LINK_GC yes)
 
 # Linker extra options here.
-# OPTIMIZED FOR SIZE: Garbage collection handled by USE_LINK_GC already
 set(USE_LDOPT)
 
 # Enable this if you want link time optimizations (LTO) - this flag affects chibios only
-# DISABLED: LTO breaks firmware section placement in embedded systems
 set(USE_LTO no)
 
 # If enabled, this option allows to compile the application in THUMB mode.
@@ -269,21 +266,6 @@ set(CPPSRC
 	ui/ui_tone_key.cpp
 	ui/ui_transmitter.cpp
 	ui/ui_bmpview.cpp
-	# Container Control System (integrated app)
-	external/container_control/ui_container_control.cpp
-	external/container_control/ui_container_setup.cpp
-	external/container_control/ui_scanning.cpp
-	external/container_control/ui_device_list.cpp
-	external/container_control/ui_security_dashboard.cpp
-	external/container_control/ui_admin_login.cpp
-	external/container_control/driver_gate/driver_gate.cpp
-	external/container_control/device_profiler/device_profiler.cpp
-	external/container_control/scanner/scanner.cpp
-	external/container_control/security/anti_jamming.cpp
-	external/container_control/security/gps_spoofing.cpp
-	external/container_control/security/threat_detection.cpp
-	external/container_control/security/forensic_evidence.cpp
-	external/container_control/security/admin_security.cpp
 	apps/ais_app.cpp
 	apps/analog_audio_app.cpp
 	apps/ble_rx_app.cpp

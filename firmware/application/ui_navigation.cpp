@@ -31,7 +31,6 @@
 
 #include "ui_about_simple.hpp"
 #include "ui_adsb_rx.hpp"
-#include "external/container_control/ui_container_control.hpp"
 #include "ui_aprs_rx.hpp"
 #include "ui_aprs_tx.hpp"
 #include "ui_btle_rx.hpp"
@@ -126,7 +125,6 @@ const NavigationView::AppList NavigationView::appList = {
     /* RX ********************************************************************/
     {"adsbrx", "ADS-B", RX, Color::green(), &bitmap_icon_adsb, new ViewFactory<ADSBRxView>()},
     {"ais", "AIS Boats", RX, Color::green(), &bitmap_icon_ais, new ViewFactory<AISAppView>()},
-    {"container", "Container", RX, Color::red(), &bitmap_icon_scanner, new ViewFactory<ContainerControlView>()},
     {"aprsrx", "APRS", RX, Color::green(), &bitmap_icon_aprs, new ViewFactory<APRSRXView>()},
     {"audio", "Audio", RX, Color::green(), &bitmap_icon_speaker, new ViewFactory<AnalogAudioView>()},
     {"blerx", "BLE Rx", RX, Color::green(), &bitmap_icon_btle, new ViewFactory<BLERxView>()},
