@@ -57,9 +57,7 @@ class ScanningView : public View {
         {20, 145, 200, 16},
         "Devices: 0"};
 
-    Text text_info{
-        {20, 175, 200, 32},
-        "Scanning ISM bands\nfor tracking devices..."};
+    // Removed text_info to save flash space
 
     Button button_pause{
         {40, 220, 80, 32},

@@ -20,10 +20,10 @@ class ContainerControlView : public View {
    private:
     NavigationView& nav_;
 
-    // Title
+    // Title (shortened to save flash)
     Text text_title{
         {10, 10, 220, 20},
-        "CONTAINER CONTROL v2.0"};
+        "CONTAINER CONTROL"};
 
     // Status indicators with dots
     Rectangle rect_tx_indicator{

@@ -37,7 +37,6 @@ ScanningView::ScanningView(NavigationView& nav, const char* container_id, const 
         &text_progress,
         &text_frequency,
         &text_devices,
-        &text_info,
         &button_pause,
         &button_stop,
         &button_results});

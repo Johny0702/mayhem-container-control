@@ -30,9 +30,9 @@ class ContainerSetupView : public View {
     };
     OperationMode operation_mode_ = OperationMode::MODE_CONTAINER;
 
-    // Container info
-    char container_id_[16] = "MSCU0000000";
-    char location_[32] = "Port Location";
+    // Container info (shortened defaults to save flash)
+    char container_id_[16] = "MSCU000";
+    char location_[32] = "Hamburg";
 
     // Selected scan profiles
     bool profile_ism_ = true;
