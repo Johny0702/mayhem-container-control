@@ -144,49 +144,28 @@ void Scanner::clear_results() {
 }
 
 void Scanner::process() {
-    // Only process if scanning
-    if (status_ != ScanStatus::STATUS_SCANNING) {
-        return;
-    }
-
-    // Check if we have ranges configured
-    if (range_count_ == 0 || current_range_index_ >= range_count_) {
+    if (status_ != ScanStatus::STATUS_SCANNING || range_count_ == 0 ||
+        current_range_index_ >= range_count_) {
         status_ = ScanStatus::STATUS_COMPLETE;
         return;
     }
 
-    // Get current range
-    const FrequencyRange& current_range = ranges_[current_range_index_];
-
-    // Increment current step
+    const FrequencyRange& range = ranges_[current_range_index_];
     current_step_++;
+    current_frequency_ += range.step_size;
 
-    // Advance frequency
-    current_frequency_ += current_range.step_size;
-
-    // Check if we've finished current range
-    if (current_frequency_ > current_range.end_freq) {
-        current_range_index_++;
-
-        // Check if more ranges to scan
-        if (current_range_index_ < range_count_) {
+    if (current_frequency_ > range.end_freq) {
+        if (++current_range_index_ < range_count_) {
             current_frequency_ = ranges_[current_range_index_].start_freq;
         } else {
-            // All ranges complete
             status_ = ScanStatus::STATUS_COMPLETE;
             return;
         }
     }
 
-    // Simulate RSSI measurement (in real implementation, use HackRF receiver)
     int8_t rssi = measure_rssi(current_frequency_);
-
-    // If signal detected (above threshold), add to results
     if (rssi > -80 && result_count_ < MAX_SCAN_RESULTS) {
-        results_[result_count_].frequency = current_frequency_;
-        results_[result_count_].rssi = rssi;
-        results_[result_count_].active_signal = (rssi > -70);
-        result_count_++;
+        results_[result_count_++] = {current_frequency_, rssi, rssi > -70};
     }
 }
 
