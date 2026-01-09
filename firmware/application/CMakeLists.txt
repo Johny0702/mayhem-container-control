@@ -55,8 +55,8 @@ set(USE_LINK_GC yes)
 set(USE_LDOPT)
 
 # Enable this if you want link time optimizations (LTO) - this flag affects chibios only
-# ENABLED FOR SIZE: Aggressive cross-module optimization
-set(USE_LTO yes)
+# DISABLED: LTO breaks firmware section placement in embedded systems
+set(USE_LTO no)
 
 # If enabled, this option allows to compile the application in THUMB mode.
 set(USE_THUMB yes)
