@@ -75,9 +75,9 @@ set(EXTCPPSRC
 	external/protoview/main.cpp
 	external/protoview/ui_protoview.cpp
 
-	#adsbtx  3544 byte - adsb shared part
-	external/adsbtx/main.cpp
-	external/adsbtx/ui_adsb_tx.cpp
+	#adsbtx  3544 byte - adsb shared part - REMOVED FOR SPACE
+	#external/adsbtx/main.cpp
+	#external/adsbtx/ui_adsb_tx.cpp
 
 	#morse_tx 768 bytes
 	external/morse_tx/main.cpp
@@ -195,9 +195,9 @@ set(EXTCPPSRC
 
 	
 	
-	#ert 3040 bytes - has common with baseband, could be renamed the namespace, so both could have it, but not kept in fw.
-	external/ert/main.cpp
-	external/ert/ert_app.cpp
+	#ert 3040 bytes - has common with baseband, could be renamed the namespace, so both could have it, but not kept in fw. - REMOVED FOR SPACE
+	#external/ert/main.cpp
+	#external/ert/ert_app.cpp
 
 	#epirb_rx 168 byte flash 
 	external/epirb_rx/main.cpp
@@ -208,10 +208,10 @@ set(EXTCPPSRC
 	external/soundboard/soundboard_app.cpp
 
 	
-	#bht_tx - 3920 byte flash, unknown
-	external/bht_tx/main.cpp
-	external/bht_tx/ui_bht_tx.cpp
-	external/bht_tx/bht.cpp
+	#bht_tx - 3920 byte flash, unknown - REMOVED FOR SPACE
+	#external/bht_tx/main.cpp
+	#external/bht_tx/ui_bht_tx.cpp
+	#external/bht_tx/bht.cpp
 
 	
 	
@@ -241,7 +241,7 @@ set(EXTAPPLIST
 	wardrivemap
 	tpmsrx
 	protoview
-	adsbtx
+	#adsbtx
 	morse_tx
 	sstvtx
 	sstvrx
@@ -265,10 +265,10 @@ set(EXTAPPLIST
 	playlist_editor
 	scanner
 	detector_rx
-	ert
+	#ert
 	epirb_rx
 	soundboard
-	bht_tx
+	#bht_tx
 	flex_rx
 	subcarrx
 )
